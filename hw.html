@@ -1,0 +1,35 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" >
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" formControlName="name">
+      <div *ngIf="userForm.get('name').invalid && userForm.get('name').touched">
+        <div *ngIf="userForm.get('name').hasError('required')">Name is required</div>
+        <div *ngIf="userForm.get('name').hasError('minlength')">Name must be at least 3 characters</div>
+      </div>
+    </div>
+    
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email">
+      <div *ngIf="userForm.get('email').invalid && userForm.get('email').touched">
+        <div *ngIf="userForm.get('email').hasError('required')">Email is required</div>
+        <div *ngIf="userForm.get('email').hasError('email')">Invalid email format</div>
+      </div>
+    </div>
+  
+    <div>
+      <label for="experienceLevel">Experience Level:</label>
+      <select id="experienceLevel" formControlName="experienceLevel">
+        <option value="" disabled>Select experience level</option>
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advanced">Advanced</option>
+      </select>
+      <div *ngIf="userForm.get('experienceLevel').invalid && userForm.get('experienceLevel').touched">
+        Experience level is required
+      </div>
+    </div>
+  
+    <button type="submit" [disabled]="userForm.invalid">Submit</button>
+  </form>
+  
